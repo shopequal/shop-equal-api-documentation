@@ -1,0 +1,180 @@
+---
+swagger: "2.0"
+info:
+  description: "This is the API for Shop Equal. \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n"
+  version: 1.0.0
+  title: Shop Equal
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /mdiaz26/shop-equal-api/1.0.0
+tags:
+- name: user
+  description: Operations for all users
+  externalDocs:
+    description: User operations
+    url: http://swagger.io
+- name: admin
+  description: Operations for admin only
+  externalDocs:
+    description: Admin operations
+    url: http://swagger.io
+schemes:
+- https
+- http
+paths:
+  /businesses:
+    get:
+      summary: Find all businesses in database
+      operationId: getBusinesses
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters: []
+      responses:
+        "405":
+          description: Invalid input
+    post:
+      summary: Add a new business to the database
+      operationId: addBusiness
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - in: body
+        name: body
+        description: Business object that needs to be added to the store
+        required: true
+        schema:
+          $ref: '#/definitions/Business'
+      responses:
+        "405":
+          description: Invalid input
+  /businesses/{id}:
+    get:
+      summary: Find a single business
+      operationId: getBusinessById
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: id
+        in: path
+        description: id of business to return
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "405":
+          description: Invalid input
+    put:
+      summary: Update specific business
+      operationId: putBusinessById
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: id
+        in: path
+        description: id of business to be updated
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Business object that needs to be updated
+        required: true
+        schema:
+          $ref: '#/definitions/Business'
+      responses:
+        "405":
+          description: Invalid input
+    delete:
+      summary: Delete a single business
+      operationId: deleteBusinessById
+      consumes:
+      - application/json
+      - application/xml
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: id
+        in: path
+        description: id of business to return
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "405":
+          description: Invalid input
+definitions:
+  Business:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+        example: Ray's BBQ
+      category:
+        type: string
+        example: restaurant
+      phone_number:
+        type: string
+        example: 718-123-4567
+      website:
+        type: string
+        example: raysbbq.com
+      full_address:
+        type: string
+        example: 6087 Broadway, The Bronx, NY, 10471
+      address_line_1:
+        type: string
+        example: 6087 Broadway
+      city:
+        type: string
+        example: The Bronx
+      state:
+        type: string
+        example: NY
+      zip:
+        type: string
+        example: "10471"
+      neighborhood:
+        type: string
+        example: Riverdale
+      approved:
+        type: boolean
+        example: false
+    xml:
+      name: Business
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
